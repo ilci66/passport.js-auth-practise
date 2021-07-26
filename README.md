@@ -1,0 +1,1 @@
+An express app where I practise various auth strategies using passport.js
