@@ -1,1 +1,8 @@
-console.log(document.getElementById("para"))
+// console.log(document.getElementById("para"))
+
+const handleSubmitLogin = () => {
+  event.preventDefault();
+  let username = document.getElementById('loginusername').value;
+  let password = document.getElementById('loginpassword').value;
+  console.log(username, password)
+}

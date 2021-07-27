@@ -3,14 +3,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Document</title>
 </head>
 <body>
   <h1>Login</h1>
-  <form >
+  <form onsubmit="handleSubmitLogin()">
     <label>username</label>
     <input
+      id="loginusername"
       placeholder="example"
       type="text"
       name="username"
@@ -19,6 +19,7 @@
     <br>
     <label>password</label>
     <input
+    id="loginpassword"
     type="password"
     name="password"
     >
@@ -26,13 +27,11 @@
     <br>
     <input type="submit" value="Submit"></label>
   </form>
-  <p id="para">ooo</p>
     <div>
       <h3>Login using:</h3>
       <p>Google</p>
       <p>github</p>
     </div>
-  <button>click this</button>
 </body>
 <script src="../public/client.js">
 </script>

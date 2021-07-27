@@ -1,5 +1,7 @@
 const express = require('express');
 require('dotenv').config();
+const bodyParser = require('body-parser');
+const session = require('express-session');
 const app = express();
 
 const routes = require('./routes/routes.js')
