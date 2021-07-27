@@ -1,21 +1,22 @@
 const passport = require('passport');
 //I keep forgetting to add the .Strategy in the end 
-const localStrategy = require('local-strategy').Strategy
+const localStrategy = require('passport-local').Strategy;
 const User = require('../model.js')
 
 //a middleware using passport for sign ups
-passport.use('sign up', 
+passport.use(
+  'signup',
   new localStrategy(
     {
-      usernameField = 'email',
-      passwordField = 'password'
+      usernameField: 'email',
+      passwordField: 'password'
     },
     async (email, password, done) => {
-      try{
-        //creating and passing the user I create to the next middleware
+      try {
         const user = await User.create({ email, password });
+        //creating and passing the user I create to the next middleware
         return done(null, user);
-      }catch(error) {
+      } catch (error) {
         done(error);
       }
     }
