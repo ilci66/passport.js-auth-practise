@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
             
             const body = { _id: user._id, email: user.email };
             const token = jwt.sign({ user:body }, 'TOP_SECRET')
-            console.log(token)
+            console.log("token >>>>",token)
             return res.json({ token })
           }
         )

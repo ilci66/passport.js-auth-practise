@@ -38,7 +38,8 @@ app.use('/user', passport.authenticate('jwt', { session: false }), secureRoutes)
 
 
 // Handle errors.
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
+  console.log("err in server.js file", err)
   res.status(err.status || 500);
   res.json({ error: err });
 });

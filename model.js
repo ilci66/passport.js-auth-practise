@@ -20,19 +20,17 @@ const UserSchema = new Schema({
 //which is always nice
 UserSchema.pre(
   'save',
-  async (next) => {
+  async function(next) {
     //this refers to the current document about to be saved.
-    console.log('here yo')
     const user = this;
-    console.log('also here')
-    console.log("password" ,this.password)
+    console.log("user in pre-save>> ", user)
+    // User.findOne({email: user.email}).exec()
     const hash = await bcrypt.hash(this.password, 10);
-    console.log('here too')
-    this.password = await hash;
-    console.log('pre hashing')
+    // console.log(this.password, hash)
+    this.password = hash;
     next();
   }
-)
+);
 
 //again I usually do it some other way but this is fine too
 //adding a method to he instance
