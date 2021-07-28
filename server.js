@@ -1,8 +1,22 @@
 const express = require('express');
 require('dotenv').config();
+const mongoose = require('mongoose');
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+
+const User = require('./model.js');
+
 const app = express();
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  //the fixe for the deprecation warning
+  useCreateIndex: true
+  })
+  .then(() => console.log('connected to database'))
 
 const routes = require('./routes/routes.js')
 // console.log(__dirname)
