@@ -7,8 +7,6 @@ const session = require('express-session');
 
 const User = require('./model.js');
 
-const app = express();
-
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -19,17 +17,33 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log('connected to database'))
 
 const routes = require('./routes/routes.js')
+const secureRoutes = require('./routes/secure-routes.js'); 
+
+require('./auth/auth.js')
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
 // console.log(__dirname)
 //took me a while to figure out the use of it 
 //but finally used static to fix the error while using 
 //javascript in html from other files 
 app.use('/public', express.static(__dirname + '/public'));
-const port = process.env.PORT || 3000;
 
-// console.log(process.env.PORT)
 
 app.use('/', routes)
+//now using jwt strategy as a middleware to restrict access
+app.use('/user', passport.authenticate('jwt', { session: false }), secureRoutes);
 
+
+// Handle errors.
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.json({ error: err });
+});
+
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`your app is live on port: ${port}`)

@@ -22,17 +22,21 @@ UserSchema.pre(
   'save',
   async (next) => {
     //this refers to the current document about to be saved.
+    console.log('here yo')
     const user = this;
+    console.log('also here')
+    console.log("password" ,this.password)
     const hash = await bcrypt.hash(this.password, 10);
-
-    this.password = hash;
+    console.log('here too')
+    this.password = await hash;
+    console.log('pre hashing')
     next();
   }
 )
 
 //again I usually do it some other way but this is fine too
 //adding a method to he instance
-UserSchema.methods.isValidPassword = async (password) => {
+UserSchema.methods.isValidPassword = async function(password) {
   const user = this;
   const compare = await bcrypt.compare(password, user.password);
 

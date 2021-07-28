@@ -17,9 +17,10 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await User.create({ email, password });
-        //creating and passing the user I create to the next middleware
+
         return done(null, user);
       } catch (error) {
+        console.log(error)
         done(error);
       }
     }
@@ -70,10 +71,10 @@ passport.use(
       //with it I can do database calls
       console.log(token)
       try {
-        //passing to the other middlewater here
+        //passing to the other middleware here
         return done(null, token.user);
       } catch (error) {
-        done(error);
+        done("this is the error", error);
       }
     }
   )

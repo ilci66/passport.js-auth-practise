@@ -9,10 +9,6 @@ router.get('/', (req, res) => {
   // console.log(path.dirname(__dirname))
   res.sendFile(path.dirname(__dirname) + "/views/home.html")
 })
-
-router.get('/signup', (req, res) => {
-  res.sendFile(path.dirname(__dirname) + "/views/signup.html")
-})
 router.post(
   '/signup',
   passport.authenticate('signup', { session: false }),
@@ -23,6 +19,11 @@ router.post(
     });
   }
 );
+
+router.get('/signup', (req, res) => {
+  res.sendFile(path.dirname(__dirname) + "/views/signup.html")
+})
+
 
 router.get('/login', (req, res) => {
   res.sendFile(path.dirname(__dirname) + "/views/login.html")
@@ -58,17 +59,7 @@ router.post('/login', async (req, res) => {
   )(req, res, next)
 })
 
-//this is the secure route 
-router.get(
-  '/profile',
-  (req, res, next) => {
-    res.json({
-      message: 'You made it to the secure route',
-      user: req.user,
-      token: req.query.secret_token
-    })
-  }
-);
+
 
 module.exports = router;
 module.exports = router;
