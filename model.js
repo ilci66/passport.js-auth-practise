@@ -18,6 +18,9 @@ const UserSchema = new Schema({
 //this is a hook and hashes the password before saving
 //I normally handle elsewhere but learned something new 
 //which is always nice
+//decided not the use this for my other projects,
+//because it changes the id of the data in database
+//when someone tries to create a duplicate
 UserSchema.pre(
   'save',
   async function(next) {
